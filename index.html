@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTN Kitab - Klassik Test Nəzəriyyəsi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .main-content {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .book-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .book-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #34495e;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .toc a:hover {
+            background-color: #ecf0f1;
+            color: #2980b9;
+        }
+
+        .toc a.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .chapter {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .chapter.active {
+            display: block;
+        }
+
+        .chapter h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+
+        .chapter h3 {
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+            color: #34495e;
+        }
+
+        .chapter p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.1em;
+        }
+
+        .formula {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .example {
+            background-color: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .nav-btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .sidebar {
+                position: relative;
+                top: auto;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .book-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">Mündəricat</h3>
+            <ul class="toc" id="tableOfContents">
+                <li><a href="#intro" onclick="showChapter('intro', this)">Giriş</a></li>
+                <li><a href="#chapter1" onclick="showChapter('chapter1', this)">1. Klassik Test Nəzəriyyəsinin Əsasları</a></li>
+                <li><a href="#chapter2" onclick="showChapter('chapter2', this)">2. Etibarlılıq Nəzəriyyəsi</a></li>
+                <li><a href="#chapter3" onclick="showChapter('chapter3', this)">3. Düzgünlük Nəzəriyyəsi</a></li>
+                <li><a href="#chapter4" onclick="showChapter('chapter4', this)">4. Mədd Analizi</a></li>
+                <li><a href="#chapter5" onclick="showChapter('chapter5', this)">5. Test Qurulması</a></li>
+                <li><a href="#conclusion" onclick="showChapter('conclusion', this)">Nəticə</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <h1 class="book-title">KTN Kitab</h1>
+            <p class="book-subtitle">Klassik Test Nəzəriyyəsinə aid kitab</p>
+
+            <div id="intro" class="chapter active">
+                <h2>Giriş</h2>
+                <p>Klassik Test Nəzəriyyəsi (KTN) psixometrikanın əsas nəzəriyyələrindən biridir və testlərin keyfiyyətini qiymətləndirmək üçün vacib alətlər təqdim edir.</p>
+                
+                <p>Bu kitab klassik test nəzəriyyəsinin əsas prinsiplərini, metodlarını və praktik tətbiqlərini əhatə edir. Kitab həm nəzəri biliklər, həm də praktik nümunələrlə zənginləşdirilmişdir.</p>
+                
+                <div class="note">
+                    <strong>Qeyd:</strong> Bu kitab psixologiya, təhsil və statistika sahələrində çalışan mütəxəssislər üçün nəzərdə tutulmuşdur.
+                </div>
+            </div>
+
+            <div id="chapter1" class="chapter">
+                <h2>1. Klassik Test Nəzəriyyəsinin Əsasları</h2>
+                
+                <h3>1.1 Tarixi Inkişaf</h3>
+                <p>Klassik test nəzəriyyəsi XX əsrin əvvəllərində formalaşmağa başlamışdır. Bu nəzəriyyənin əsasını qoyan əsas şəxslər arasında Charles Spearman, Louis Thurstone və digər tanınmış psixometriklər var.</p>
+                
+                <h3>1.2 Əsas Fərziyyələr</h3>
+                <p>KTN-nin üç əsas fərziyyəsi var:</p>
+                <ul>
+                    <li>Müşahidə olunan bal = Həqiqi bal + Xəta</li>
+                    <li>Xətaların orta değeri sıfırdır</li>
+                    <li>Həqiqi bal və xəta arasında korrelyasiya yoxdur</li>
+                </ul>
+                
+                <div class="formula">
+                    X = T + E
+                    <br>
+                    burada: X - müşahidə olunan bal, T - həqiqi bal, E - xəta
+                </div>
+            </div>
+
+            <div id="chapter2" class="chapter">
+                <h2>2. Etibarlılıq Nəzəriyyəsi</h2>
+                
+                <h3>2.1 Etibarlılığın Tərifi</h3>
+                <p>Etibarlılıq testin tutarlılığını və dəqiqliyini ölçən əsas göstəricidir. Bu, testin nə dərəcədə stabil nəticələr verdiyini göstərir.</p>
+                
+                <h3>2.2 Etibarlılıq Növləri</h3>
+                <p>Etibarlılığın müxtəlif növləri mövcuddur:</p>
+                <ul>
+                    <li>Test-retest etibarlılığı</li>
+                    <li>Daxili tutarlılıq etibarlılığı</li>
+                    <li>Paralel formalar etibarlılığı</li>
+                    <li>Yarıya bölmə etibarlılığı</li>
+                </ul>
+                
+                <div class="example">
+                    <strong>Nümunə:</strong> Cronbach's Alpha əmsalı daxili tutarlılığı ölçmək üçün ən çox istifadə olunan metodlardan biridir.
+                </div>
+            </div>
+
+            <div id="chapter3" class="chapter">
+                <h2>3. Düzgünlük Nəzəriyyəsi</h2>
+                
+                <h3>3.1 Düzgünlüyün Mahiyyəti</h3>
+                <p>Düzgünlük testin nə dərəcədə ölçmək istədiyi konstruktu ölçdüyünü göstərir. Bu, testin ən vacib keyfiyyət göstəricisidir.</p>
+                
+                <h3>3.2 Düzgünlük Növləri</h3>
+                <p>Əsas düzgünlük növləri:</p>
+                <ul>
+                    <li>Məzmun düzgünlüyü</li>
+                    <li>Konstrukt düzgünlüyü</li>
+                    <li>Kriteriya düzgünlüyü</li>
+                </ul>
+            </div>
+
+            <div id="chapter4" class="chapter">
+                <h2>4. Mədd Analizi</h2>
+                
+                <h3>4.1 Mədd Çətinlik İndeksi</h3>
+                <p>Hər məddın çətinlik səviyyəsini müəyyən etmək üçün istifadə olunan statistik göstərici.</p>
+                
+                <div class="formula">
+                    p = (doğru cavab verən şəxslərin sayı) / (ümumi şəxslərin sayı)
+                </div>
+                
+                <h3>4.2 Mədd Seçicilik İndeksi</h3>
+                <p>Məddın yüksək və aşağı qrup arasında fərq yarada bilmə qabiliyyətini ölçür.</p>
+            </div>
+
+            <div id="chapter5" class="chapter">
+                <h2>5. Test Qurulması</h2>
+                
+                <h3>5.1 Test Planlaması</h3>
+                <p>Keyfiyyətli test yaratmaq üçün əvvəlcədən planlaşdırma və spesifikasiya hazırlanması vacibdir.</p>
+                
+                <h3>5.2 Mədd Yazılması</h3>
+                <p>Effektiv test məddləri yazarkən nəzərə alınmalı olan əsas prinsiplər:</p>
+                <ul>
+                    <li>Aydın və dəqiq ifadə</li>
+                    <li>Təkərarnormalı vermə</li>
+                    <li>Mədəniyyət və dilə həssaslıq</li>
+                    <li>Obyektivlik</li>
+                </ul>
+            </div>
+
+            <div id="conclusion" class="chapter">
+                <h2>Nəticə</h2>
+                
+                <p>Klassik Test Nəzəriyyəsi müasir psixometrikanın əsasını təşkil edir və testlərin keyfiyyətini qiymətləndirmək üçün möhkəm nəzəri çərçivə təqdim edir.</p>
+                
+                <p>Bu kitabda müzakirə olunan prinsip və metodlar praktik test qurulması və təhlilində geniş tətbiq tapır. Gələcək tədqiqatlarda bu sahənin daha da inkişaf etdirilməsi gözlənilir.</p>
+                
+                <div class="note">
+                    <strong>Tövsiyə:</strong> Bu sahədə daha dərin bilgi əldə etmək üçün müasir psixometrika ədəbiyyatını izləməyiniz tövsiyə olunur.
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" onclick="previousChapter()" id="prevBtn">← Əvvəlki</button>
+                <button class="nav-btn" onclick="nextChapter()" id="nextBtn">Növbəti →</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const chapters = ['intro', 'chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5', 'conclusion'];
+        let currentChapter = 0;
+
+        function showChapter(chapterId, linkElement) {
+            // Hide all chapters
+            document.querySelectorAll('.chapter').forEach(chapter => {
+                chapter.classList.remove('active');
+            });
+            
+            // Remove active class from all links
+            document.querySelectorAll('.toc a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected chapter
+            document.getElementById(chapterId).classList.add('active');
+            linkElement.classList.add('active');
+            
+            // Update current chapter index
+            currentChapter = chapters.indexOf(chapterId);
+            updateNavigationButtons();
+        }
+
+        function nextChapter() {
+            if (currentChapter < chapters.length - 1) {
+                currentChapter++;
+                const nextChapterId = chapters[currentChapter];
+                const nextLink = document.querySelector(`a[href="#${nextChapterId}"]`);
+                showChapter(nextChapterId, nextLink);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapter > 0) {
+                currentChapter--;
+                const prevChapterId = chapters[currentChapter];
+                const prevLink = document.querySelector(`a[href="#${prevChapterId}"]`);
+                showChapter(prevChapterId, prevLink);
+            }
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentChapter === 0;
+            nextBtn.disabled = currentChapter === chapters.length - 1;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstLink = document.querySelector('.toc a');
+            firstLink.classList.add('active');
+            updateNavigationButtons();
+        });
+    </script>
+</body>
+</html>
