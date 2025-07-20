@@ -15,375 +15,283 @@
             font-family: 'Georgia', 'Times New Roman', serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            grid-gap: 20px;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
         }
 
-        .sidebar {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            position: sticky;
-            top: 20px;
-            height: fit-content;
+        .book-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #667eea;
         }
 
-        .main-content {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 40px;
-        }
-
-        .book-title {
+        .title {
             font-size: 2.5em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
+            font-weight: bold;
         }
 
-        .book-subtitle {
-            font-size: 1.2em;
+        .subtitle {
+            font-size: 1.3em;
             color: #7f8c8d;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-style: italic;
         }
 
-        .toc {
-            list-style: none;
-        }
-
-        .toc li {
-            margin-bottom: 8px;
-        }
-
-        .toc a {
-            text-decoration: none;
-            color: #34495e;
-            padding: 8px 12px;
-            display: block;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .toc a:hover {
-            background-color: #ecf0f1;
-            color: #2980b9;
-        }
-
-        .toc a.active {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .chapter {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .chapter.active {
-            display: block;
-        }
-
-        .chapter h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
-        }
-
-        .chapter h3 {
-            font-size: 1.5em;
-            margin: 25px 0 15px 0;
-            color: #34495e;
-        }
-
-        .chapter p {
-            margin-bottom: 15px;
-            text-align: justify;
+        .description {
             font-size: 1.1em;
+            color: #34495e;
+            margin-bottom: 40px;
+            line-height: 1.8;
         }
 
-        .formula {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-        }
-
-        .example {
-            background-color: #e8f5e8;
-            border-left: 4px solid #27ae60;
-            padding: 15px;
-            margin: 20px 0;
-        }
-
-        .note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-        }
-
-        .navigation {
+        .btn-container {
             display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .nav-btn {
-            background-color: #3498db;
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
-        .nav-btn:hover {
-            background-color: #2980b9;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
-        .nav-btn:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
+        .btn-secondary {
+            background: linear-gradient(45deg, #95a5a6, #34495e);
+            box-shadow: 0 5px 15px rgba(149, 165, 166, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px rgba(149, 165, 166, 0.4);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .book-frame {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+        }
+
+        .book-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 1001;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (max-width: 768px) {
             .container {
-                grid-template-columns: 1fr;
-                padding: 10px;
+                padding: 40px 30px;
+                margin: 10px;
             }
             
-            .sidebar {
-                position: relative;
-                top: auto;
-            }
-            
-            .main-content {
-                padding: 20px;
-            }
-            
-            .book-title {
+            .title {
                 font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="sidebar">
-            <h3 style="margin-bottom: 20px; color: #2c3e50;">Mündəricat</h3>
-            <ul class="toc" id="tableOfContents">
-                <li><a href="#intro" onclick="showChapter('intro', this)">Giriş</a></li>
-                <li><a href="#chapter1" onclick="showChapter('chapter1', this)">1. Klassik Test Nəzəriyyəsinin Əsasları</a></li>
-                <li><a href="#chapter2" onclick="showChapter('chapter2', this)">2. Etibarlılıq Nəzəriyyəsi</a></li>
-                <li><a href="#chapter3" onclick="showChapter('chapter3', this)">3. Düzgünlük Nəzəriyyəsi</a></li>
-                <li><a href="#chapter4" onclick="showChapter('chapter4', this)">4. Mədd Analizi</a></li>
-                <li><a href="#chapter5" onclick="showChapter('chapter5', this)">5. Test Qurulması</a></li>
-                <li><a href="#conclusion" onclick="showChapter('conclusion', this)">Nəticə</a></li>
-            </ul>
-        </nav>
+    <div class="container fade-in">
+        <div class="book-icon">📚</div>
+        <h1 class="title">KTN Kitab</h1>
+        <p class="subtitle">Klassik Test Nəzəriyyəsinə aid kitab</p>
+        
+        <p class="description">
+            Bu kitab klassik test nəzəriyyəsinin əsas prinsiplərini, metodlarını və praktik tətbiqlərini əhatə edir. 
+            Psixologiya, təhsil və statistika sahələrində çalışan mütəxəssislər üçün hazırlanmışdır.
+        </p>
+        
+        <div class="btn-container">
+            <a href="Kitab.html" class="btn" onclick="openBook(event)">
+                📖 Kitabı Oxu
+            </a>
+            <a href="Kitab.html" class="btn btn-secondary" target="_blank">
+                🔗 Yeni Səkməda Aç
+            </a>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Kitab yüklənir...</p>
+        </div>
+    </div>
 
-        <main class="main-content">
-            <h1 class="book-title">KTN Kitab</h1>
-            <p class="book-subtitle">Klassik Test Nəzəriyyəsinə aid kitab</p>
-
-            <div id="intro" class="chapter active">
-                <h2>Giriş</h2>
-                <p>Klassik Test Nəzəriyyəsi (KTN) psixometrikanın əsas nəzəriyyələrindən biridir və testlərin keyfiyyətini qiymətləndirmək üçün vacib alətlər təqdim edir.</p>
-                
-                <p>Bu kitab klassik test nəzəriyyəsinin əsas prinsiplərini, metodlarını və praktik tətbiqlərini əhatə edir. Kitab həm nəzəri biliklər, həm də praktik nümunələrlə zənginləşdirilmişdir.</p>
-                
-                <div class="note">
-                    <strong>Qeyd:</strong> Bu kitab psixologiya, təhsil və statistika sahələrində çalışan mütəxəssislər üçün nəzərdə tutulmuşdur.
-                </div>
-            </div>
-
-            <div id="chapter1" class="chapter">
-                <h2>1. Klassik Test Nəzəriyyəsinin Əsasları</h2>
-                
-                <h3>1.1 Tarixi Inkişaf</h3>
-                <p>Klassik test nəzəriyyəsi XX əsrin əvvəllərində formalaşmağa başlamışdır. Bu nəzəriyyənin əsasını qoyan əsas şəxslər arasında Charles Spearman, Louis Thurstone və digər tanınmış psixometriklər var.</p>
-                
-                <h3>1.2 Əsas Fərziyyələr</h3>
-                <p>KTN-nin üç əsas fərziyyəsi var:</p>
-                <ul>
-                    <li>Müşahidə olunan bal = Həqiqi bal + Xəta</li>
-                    <li>Xətaların orta değeri sıfırdır</li>
-                    <li>Həqiqi bal və xəta arasında korrelyasiya yoxdur</li>
-                </ul>
-                
-                <div class="formula">
-                    X = T + E
-                    <br>
-                    burada: X - müşahidə olunan bal, T - həqiqi bal, E - xəta
-                </div>
-            </div>
-
-            <div id="chapter2" class="chapter">
-                <h2>2. Etibarlılıq Nəzəriyyəsi</h2>
-                
-                <h3>2.1 Etibarlılığın Tərifi</h3>
-                <p>Etibarlılıq testin tutarlılığını və dəqiqliyini ölçən əsas göstəricidir. Bu, testin nə dərəcədə stabil nəticələr verdiyini göstərir.</p>
-                
-                <h3>2.2 Etibarlılıq Növləri</h3>
-                <p>Etibarlılığın müxtəlif növləri mövcuddur:</p>
-                <ul>
-                    <li>Test-retest etibarlılığı</li>
-                    <li>Daxili tutarlılıq etibarlılığı</li>
-                    <li>Paralel formalar etibarlılığı</li>
-                    <li>Yarıya bölmə etibarlılığı</li>
-                </ul>
-                
-                <div class="example">
-                    <strong>Nümunə:</strong> Cronbach's Alpha əmsalı daxili tutarlılığı ölçmək üçün ən çox istifadə olunan metodlardan biridir.
-                </div>
-            </div>
-
-            <div id="chapter3" class="chapter">
-                <h2>3. Düzgünlük Nəzəriyyəsi</h2>
-                
-                <h3>3.1 Düzgünlüyün Mahiyyəti</h3>
-                <p>Düzgünlük testin nə dərəcədə ölçmək istədiyi konstruktu ölçdüyünü göstərir. Bu, testin ən vacib keyfiyyət göstəricisidir.</p>
-                
-                <h3>3.2 Düzgünlük Növləri</h3>
-                <p>Əsas düzgünlük növləri:</p>
-                <ul>
-                    <li>Məzmun düzgünlüyü</li>
-                    <li>Konstrukt düzgünlüyü</li>
-                    <li>Kriteriya düzgünlüyü</li>
-                </ul>
-            </div>
-
-            <div id="chapter4" class="chapter">
-                <h2>4. Mədd Analizi</h2>
-                
-                <h3>4.1 Mədd Çətinlik İndeksi</h3>
-                <p>Hər məddın çətinlik səviyyəsini müəyyən etmək üçün istifadə olunan statistik göstərici.</p>
-                
-                <div class="formula">
-                    p = (doğru cavab verən şəxslərin sayı) / (ümumi şəxslərin sayı)
-                </div>
-                
-                <h3>4.2 Mədd Seçicilik İndeksi</h3>
-                <p>Məddın yüksək və aşağı qrup arasında fərq yarada bilmə qabiliyyətini ölçür.</p>
-            </div>
-
-            <div id="chapter5" class="chapter">
-                <h2>5. Test Qurulması</h2>
-                
-                <h3>5.1 Test Planlaması</h3>
-                <p>Keyfiyyətli test yaratmaq üçün əvvəlcədən planlaşdırma və spesifikasiya hazırlanması vacibdir.</p>
-                
-                <h3>5.2 Mədd Yazılması</h3>
-                <p>Effektiv test məddləri yazarkən nəzərə alınmalı olan əsas prinsiplər:</p>
-                <ul>
-                    <li>Aydın və dəqiq ifadə</li>
-                    <li>Təkərarnormalı vermə</li>
-                    <li>Mədəniyyət və dilə həssaslıq</li>
-                    <li>Obyektivlik</li>
-                </ul>
-            </div>
-
-            <div id="conclusion" class="chapter">
-                <h2>Nəticə</h2>
-                
-                <p>Klassik Test Nəzəriyyəsi müasir psixometrikanın əsasını təşkil edir və testlərin keyfiyyətini qiymətləndirmək üçün möhkəm nəzəri çərçivə təqdim edir.</p>
-                
-                <p>Bu kitabda müzakirə olunan prinsip və metodlar praktik test qurulması və təhlilində geniş tətbiq tapır. Gələcək tədqiqatlarda bu sahənin daha da inkişaf etdirilməsi gözlənilir.</p>
-                
-                <div class="note">
-                    <strong>Tövsiyə:</strong> Bu sahədə daha dərin bilgi əldə etmək üçün müasir psixometrika ədəbiyyatını izləməyiniz tövsiyə olunur.
-                </div>
-            </div>
-
-            <div class="navigation">
-                <button class="nav-btn" onclick="previousChapter()" id="prevBtn">← Əvvəlki</button>
-                <button class="nav-btn" onclick="nextChapter()" id="nextBtn">Növbəti →</button>
-            </div>
-        </main>
+    <div class="book-frame" id="bookFrame">
+        <button class="close-btn" onclick="closeBook()" title="Bağla">✕</button>
+        <iframe id="bookIframe" src=""></iframe>
     </div>
 
     <script>
-        const chapters = ['intro', 'chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5', 'conclusion'];
-        let currentChapter = 0;
-
-        function showChapter(chapterId, linkElement) {
-            // Hide all chapters
-            document.querySelectorAll('.chapter').forEach(chapter => {
-                chapter.classList.remove('active');
-            });
-            
-            // Remove active class from all links
-            document.querySelectorAll('.toc a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Show selected chapter
-            document.getElementById(chapterId).classList.add('active');
-            linkElement.classList.add('active');
-            
-            // Update current chapter index
-            currentChapter = chapters.indexOf(chapterId);
-            updateNavigationButtons();
-        }
-
-        function nextChapter() {
-            if (currentChapter < chapters.length - 1) {
-                currentChapter++;
-                const nextChapterId = chapters[currentChapter];
-                const nextLink = document.querySelector(`a[href="#${nextChapterId}"]`);
-                showChapter(nextChapterId, nextLink);
+        function openBook(event) {
+            // Mobil cihazlarda birbaşa səhifəyə keçir
+            if (window.innerWidth <= 768) {
+                return true; // Defolt link davranışını davam etdir
             }
-        }
-
-        function previousChapter() {
-            if (currentChapter > 0) {
-                currentChapter--;
-                const prevChapterId = chapters[currentChapter];
-                const prevLink = document.querySelector(`a[href="#${prevChapterId}"]`);
-                showChapter(prevChapterId, prevLink);
-            }
-        }
-
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
             
-            prevBtn.disabled = currentChapter === 0;
-            nextBtn.disabled = currentChapter === chapters.length - 1;
+            event.preventDefault();
+            
+            // Loading göstər
+            document.getElementById('loading').style.display = 'block';
+            
+            // Kitab frame-ni hazırla
+            const bookFrame = document.getElementById('bookFrame');
+            const iframe = document.getElementById('bookIframe');
+            
+            iframe.src = 'Kitab.html';
+            
+            // iframe yükləndikdən sonra
+            iframe.onload = function() {
+                document.getElementById('loading').style.display = 'none';
+                bookFrame.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            };
+            
+            // Əgər iframe yüklənməzdə, bir neçə saniyə sonra açılsın
+            setTimeout(() => {
+                if (iframe.src && !bookFrame.style.display) {
+                    document.getElementById('loading').style.display = 'none';
+                    bookFrame.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            }, 3000);
         }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            const firstLink = document.querySelector('.toc a');
-            firstLink.classList.add('active');
-            updateNavigationButtons();
+        
+        function closeBook() {
+            document.getElementById('bookFrame').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('bookIframe').src = '';
+        }
+        
+        // ESC düyməsi ilə kitabı bağla
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeBook();
+            }
+        });
+        
+        // Səhifə yükləndikdən sonra kitabın mövcudluğunu yoxla
+        window.addEventListener('load', function() {
+            fetch('Kitab.html')
+                .then(response => {
+                    if (!response.ok) {
+                        // Əgər Kitab.html tapılmazsa, xəbərdarlıq göstər
+                        const container = document.querySelector('.container');
+                        const warning = document.createElement('div');
+                        warning.style.cssText = `
+                            background-color: #fff3cd;
+                            border: 1px solid #ffeeba;
+                            border-radius: 10px;
+                            padding: 15px;
+                            margin-top: 20px;
+                            color: #856404;
+                        `;
+                        warning.innerHTML = `
+                            <strong>Diqqət:</strong> Kitab.html faylı tapılmadı. 
+                            Zəhmət olmasa faylın düzgün yerlə şdirildiyindən əmin olun.
+                        `;
+                        container.appendChild(warning);
+                    }
+                })
+                .catch(() => {
+                    // Şəbəkə xətası olduqda heç bir şey etmə
+                });
         });
     </script>
 </body>
